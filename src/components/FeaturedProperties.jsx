@@ -8,10 +8,9 @@ const PropertyCard = ({ property, delay }) => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    // IntersectionObserver — jab card screen par aaye tab animation trigger ho
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setVisible(true); },
-      { threshold: 0.1 } // thoda sa part dikhte hi animation start ho jayegi
+      { threshold: 0.1 }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
@@ -88,19 +87,19 @@ const FeaturedProperties = () => {
   ];
 
   return (
-    <section className="w-full bg-[#113529] text-white py-20 px-6 md:px-16">
+    <section className="w-full bg-[#113529] text-white py-16 md:py-20 px-4 sm:px-6 md:px-16">
       <div className="max-w-7xl mx-auto">
         
-        {/* ── Header Section ── */}
-        <div className="flex justify-between items-end mb-12">
-         <h2 className="text-4xl md:text-5xl font-serif font-bold leading-tight whitespace-nowrap">
-  Discover Featured Properties
-</h2>
+        {/* ── Header Section (Fixed Mobile View) ── */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-12">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold leading-tight">
+            Discover Featured Properties
+          </h2>
           
           {/* See All Properties Link */}
           <Link 
             to="/properties" 
-            className="flex items-center gap-2 text-sm font-medium text-slate-300 hover:text-white transition-colors group pb-2 border-b border-slate-500 hover:border-white"
+            className="flex items-center gap-2 text-sm font-medium text-slate-300 hover:text-white transition-colors group pb-1.5 border-b border-slate-500 hover:border-white shrink-0 self-start sm:self-auto"
           >
             <span>See All Properties</span>
             <IoArrowForwardOutline className="transform group-hover:translate-x-1 transition-transform" />
@@ -113,7 +112,7 @@ const FeaturedProperties = () => {
             <PropertyCard 
               key={property.id} 
               property={property} 
-              delay={index * 120} // Isse ek ke baad ek card smooth reveal hoga
+              delay={index * 120}
             />
           ))}
         </div>
