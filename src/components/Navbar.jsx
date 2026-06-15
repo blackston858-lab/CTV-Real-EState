@@ -24,11 +24,6 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Auto-close mobile menu on page change
-  useEffect(() => {
-    setIsOpen(false);
-  }, [location.pathname]);
-
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-500 ${
@@ -120,6 +115,7 @@ const Navbar = () => {
               <Link
                 key={item.label}
                 to={item.path}
+                onClick={() => setIsOpen(false)} // Mobile link click par menu close
                 style={{ 
                   transitionDelay: isOpen ? `${idx * 30}ms` : "0ms",
                   transform: isOpen ? "translateX(0)" : "translateX(-10px)"
@@ -136,12 +132,14 @@ const Navbar = () => {
           <div className="flex flex-col gap-3">
             <Link
               to="/signin"
+              onClick={() => setIsOpen(false)} // Click par menu close
               className="text-center font-medium text-white/70 hover:text-emerald-400 bg-white/5 py-3 rounded-md border border-white/5 transition-colors"
             >
               Log In
             </Link>
             <Link
               to="/add-property"
+              onClick={() => setIsOpen(false)} // Click par menu close
               className="text-center font-semibold bg-emerald-500 text-[#113529] py-3 rounded-md hover:bg-emerald-400 transition-colors active:scale-[0.98]"
             >
               Add Property
